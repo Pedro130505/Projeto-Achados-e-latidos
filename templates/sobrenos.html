@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Sobre o Projeto</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(to right, #fefcea, #f1da36);
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 60px auto;
+            background-color: #ffffff;
+            padding: 40px;
+            border-radius: 25px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        h2 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 30px;
+            font-size: 2.8rem;
+            background: linear-gradient(to right, #3498db, #2ecc71);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        p {
+            font-size: 1.3rem;
+            line-height: 1.9;
+            color: #34495e;
+            text-align: justify;
+        }
+
+        .quote {
+            margin-top: 40px;
+            font-style: italic;
+            color: #6c757d;
+            text-align: center;
+            font-size: 1.3rem;
+        }
+
+        .images {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 40px;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .images img {
+            max-width: 300px;
+            border-radius: 18px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease;
+            display: block; /* Garante que o placeholder funcione melhor se a imagem não carregar */
+        }
+
+        .images img:hover {
+            transform: scale(1.05);
+        }
+
+        @media (max-width: 768px) {
+            .images {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .images img {
+                width: 90%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Sobre o Projeto</h2>
+    <p>
+        Este site foi criado por um estudante da <strong>Universidade Federal de Minas Gerais (UFMG)</strong> com o objetivo de facilitar o reencontro entre animais de estimação e seus tutores.
+    </p>
+    <p>
+        A ideia nasceu do amor pelos animais e da vontade de ajudar a comunidade, oferecendo um espaço acessível e colaborativo onde qualquer pessoa pode divulgar animais achados ou perdidos.
+    </p>
+    <p>
+        Através da união de esforços e da solidariedade, aumentamos as chances de cada bichinho voltar para seu lar cheio de amor.
+    </p>
+
+    <div class="quote">
+        "Projeto com propósito social — porque cada animal merece voltar para casa."
+    </div>
+
+    <div class="images">
+        <!-- Imagem 1: Com atributo onerror para fallback -->
+        <img src="https://images.unsplash.com/photo-1558788353-f76d92427f16?auto=format&fit=crop&w=600&q=80" 
+             alt="[Image of Cachorro olhando feliz]"
+             onerror="this.onerror=null; this.src='https://placehold.co/300x200/cccccc/ffffff?text=IMAGEM+NAO+DISPONIVEL';">
+
+        <!-- Imagem 2: Com atributo onerror para fallback -->
+        <img src="https://images.unsplash.com/photo-1592194996308-7b43878e84a6?auto=format&fit=crop&w=600&q=80" 
+             alt="[Image of Gato relaxado ao sol]"
+             onerror="this.onerror=null; this.src='https://placehold.co/300x200/cccccc/ffffff?text=IMAGEM+NAO+DISPONIVEL';">
+    </div>
+</div>
+
+</body>
+</html>

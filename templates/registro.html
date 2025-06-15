@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Animais Achados e Perdidos - Registro</title>
+  <meta name="description" content="Este projeto tem o objetivo de ajudar pessoas a encontrarem seus animais perdidos. Projeto inteiramente realizado por um aluno da UFMG.">
+  <meta name="keywords" content="Cachorro perdido, perdi meu cachorro, achar gato, achar cachorro, animais achados, animais perdidos, UFMG">
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts - Inter -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    /* Estilo global para a fonte Inter */
+    body {
+      font-family: 'Inter', sans-serif;
+    }
+  </style>
+</head>
+<body class="bg-gray-100 min-h-screen flex flex-col justify-between">
+  <!-- Cabeçalho -->
+  <header class="bg-blue-400 text-white text-center py-6 rounded-b-lg shadow-md">
+    <h1 class="text-3xl font-bold">Registre-se</h1>
+  </header>
+
+  <!-- Conteúdo Principal -->
+  <main class="max-w-md mx-auto my-8 p-8 bg-white rounded-xl shadow-lg flex-grow w-full">
+    <h2 class="text-2xl font-semibold text-gray-800 mb-6 text-center">Faça seu Registro</h2>
+
+    <!-- Área para exibição de mensagens (sucesso ou erro) -->
+    <div id="message-display" class="my-4 p-3 rounded-md text-sm text-center hidden">
+      <!-- A mensagem será inserida aqui pelo JavaScript -->
+    </div>
+
+    <form action="/registro" method="POST" class="space-y-5">
+      <!-- Campo Nome -->
+      <div>
+        <label for="nome" class="block text-gray-700 text-sm font-medium mb-1">Nome:</label>
+        <input
+          type="text"
+          id="nome"
+          name="nome"
+          placeholder="Seu nome"
+          class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent transition duration-200"
+          required
+        >
+      </div>
+
+      <!-- Campo Email -->
+      <div>
+        <label for="email" class="block text-gray-700 text-sm font-medium mb-1">Email:</label>
+        <input
+          type="email"
+          id="email"
+          name="email"
+          placeholder="Seu email"
+          class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent transition duration-200"
+          required
+        >
+      </div>
+
+      <!-- Campo Senha -->
+      <div>
+        <label for="senha" class="block text-gray-700 text-sm font-medium mb-1">Senha:</label>
+        <input
+          type="password"
+          id="senha"
+          name="senha"
+          placeholder="Sua senha"
+          class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent transition duration-200"
+          required
+        >
+      </div>
+
+      <!-- Botão de Registro -->
+      <button
+        type="submit"
+        class="w-full bg-blue-400 text-white font-bold py-3 px-4 rounded-md hover:bg-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75 transition duration-200 transform hover:scale-105"
+      >
+        Registrar-se
+      </button>
+    </form>
+  </main>
+
+  <!-- Rodapé -->
+  <footer class="text-center py-4 text-gray-600 text-sm mt-8">
+    Projeto realizado por aluno da UFMG
+  </footer>
+
+  <script>
+    // Script para exibir mensagens passadas via URL (por exemplo, após um redirecionamento do backend)
+    document.addEventListener('DOMContentLoaded', function() {
+      const urlParams = new URLSearchParams(window.location.search);
+      const message = urlParams.get('message'); // Pega a mensagem do parâmetro 'message'
+      const messageType = urlParams.get('type'); // Pega o tipo da mensagem (ex: 'error', 'success')
+
+      const messageDisplay = document.getElementById('message-display');
+
+      if (message && messageDisplay) {
+        messageDisplay.textContent = decodeURIComponent(message); // Decodifica a mensagem para exibição
+        messageDisplay.style.display = 'block'; // Torna o contêiner visível
+
+        // Aplica estilos diferentes com base no tipo da mensagem
+        if (messageType === 'error') {
+          messageDisplay.classList.add('bg-red-100', 'text-red-700', 'border', 'border-red-400');
+        } else if (messageType === 'success') {
+          messageDisplay.classList.add('bg-green-100', 'text-green-700', 'border', 'border-green-400');
+        } else {
+          messageDisplay.classList.add('bg-blue-100', 'text-blue-700', 'border', 'border-blue-400');
+        }
+
+        // Limpa os parâmetros da URL para que a mensagem não reapareça em recargas futuras
+        urlParams.delete('message');
+        urlParams.delete('type');
+        const newUrl = window.location.pathname + (urlParams.toString() ? '?' + urlParams.toString() : '');
+        window.history.replaceState({}, document.title, newUrl);
+      }
+    });
+  </script>
+</body>
+</html>

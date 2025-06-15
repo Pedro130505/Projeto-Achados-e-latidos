@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>Login - Animais Perdidos</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      height: 100vh;
+      background: linear-gradient(to right, #1e3c72, #2a5298); /* tons de azul */
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .login-container {
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 20px;
+      padding: 40px;
+      width: 320px;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
+      position: relative;
+      color: #fff;
+    }
+
+    .login-container::before {
+      content: '';
+      position: absolute;
+      top: -50px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #1e3c72;
+      border-radius: 50%;
+      width: 80px;
+      height: 80px;
+      background-image: url('https://img.icons8.com/ios-filled/50/user-male-circle.png');
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: 50%;
+    }
+
+    .login-container h2 {
+      text-align: center;
+      margin-top: 50px;
+      margin-bottom: 30px;
+      font-size: 1.5rem;
+    }
+
+    .input-group {
+      margin-bottom: 20px;
+    }
+
+    .input-group label {
+      display: block;
+      margin-bottom: 5px;
+      font-size: 0.9rem;
+    }
+
+    .input-group input {
+      width: 100%;
+      padding: 10px 12px;
+      border: none;
+      border-radius: 10px;
+      background: rgba(255, 255, 255, 0.2);
+      color: #fff;
+      font-size: 1rem;
+    }
+
+    .input-group input::placeholder {
+      color: #e0e0e0;
+    }
+
+    .actions {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.85rem;
+      margin-bottom: 20px;
+    }
+
+    .actions a {
+      color: #cce7ff;
+      text-decoration: none;
+    }
+
+    .actions a:hover {
+      text-decoration: underline;
+    }
+
+    .remember {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    button, .register-link button {
+      width: 100%;
+      padding: 12px;
+      background-color: #2563eb;
+      color: #fff;
+      border: none;
+      border-radius: 10px;
+      font-weight: bold;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      margin-top: 10px;
+    }
+
+    button:hover, .register-link button:hover {
+      background-color: #1d4ed8;
+    }
+
+    .register-link {
+      text-align: center;
+      margin-top: 15px;
+    }
+
+    .register-link a {
+      text-decoration: none;
+      display: inline-block;
+      width: 100%;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="login-container">
+    <h2>Login</h2>
+    {% if mensagem %}
+  <div style="background-color: #fee2e2; color: #b91c1c; padding: 10px; border-radius: 8px; margin-bottom: 20px; text-align: center;">
+    {{ mensagem }}
+  </div>
+{% endif %}
+    <form action="/login" method="POST">
+      <div class="input-group">
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" placeholder="Digite seu email" required>
+      </div>
+
+      <div class="input-group">
+        <label for="senha">Senha:</label>
+        <input type="password" id="senha" name="senha" placeholder="Digite sua senha" required>
+      </div>
+
+      <div class="actions">
+        <label class="remember">
+          <input type="checkbox" name="lembrar"> Lembrar-me
+        </label>
+        <a href="#">Esqueceu a senha?</a>
+      </div>
+
+      <button type="submit">Entrar</button>
+    </form>
+
+    <div class="register-link">
+      <a href="/registro">
+        <button type="button">Fazer Registro</button>
+      </a>
+    </div>
+
+<div class="register-link">
+  <a href="/registro_ong">
+    <button type="button">Registro ONG</button>
+  </a>
+</div>
+  </div>
+
+</body>
+</html>

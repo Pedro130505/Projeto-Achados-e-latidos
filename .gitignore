@@ -1,0 +1,14 @@
+# Arquivos de socket de banco de dados e outros gerados pelo Docker/MySQL
+*.sock
+docker_recebe/*.err
+docker_recebe/*.pid
+docker_recebe/*.log
+docker_recebe/binlog.*
+docker_recebe/ib_buffer_pool
+docker_recebe/ib_logfile*
+docker_recebe/ibdata*
+docker_recebe/mysql.sock
+docker_recebe/auto.cnf
+
+# Ignorar a pasta .idea do IntelliJ/PHPStorm/PyCharm (se não quiser versionar configurações da IDE)
+.idea/

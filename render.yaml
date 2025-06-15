@@ -1,0 +1,10 @@
+services:
+  - type: web
+    name: Achados e Latidos
+    env: python
+    buildCommand: ""
+    startCommand: gunicorn main:app
+    plan: free
+    envVars:
+      - key: FLASK_ENV
+        value: production
