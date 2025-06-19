@@ -5,4 +5,4 @@ class Notificacao():
         self.email=email
 
     def manda_notificação(self,email):
-        pass
+        return True

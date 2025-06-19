@@ -3,24 +3,46 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Página Inicial</title>
+    <title>Página Inicial - Achados & Latidos</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&family=Comic+Neue:wght@800&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
     <style>
+        :root {
+            --cor-primaria-verde: #8BC34A;
+            --cor-secundaria-azul: #185a9d;
+            --cor-texto-escuro: #333;
+            --cor-texto-claro: #fff;
+            --cor-fundo-claro: #f0f2f5;
+            --cor-cinza-claro: #f4f4f4;
+            --sombra-leve: rgba(0, 0, 0, 0.1);
+            --sombra-media: rgba(0, 0, 0, 0.2);
+        }
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Montserrat', sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #f0f2f5;
+            background-color: var(--cor-fundo-claro);
+            line-height: 1.8;
+            color: var(--cor-texto-escuro);
+            font-size: 1.15em;
         }
-
         header {
-            background: linear-gradient(90deg, #43cea2, #185a9d);
-            color: white;
+            background: linear-gradient(90deg, var(--cor-primaria-verde), var(--cor-secundaria-azul));
+            color: var(--cor-texto-claro);
             padding: 20px;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            position: relative;
+            z-index: 1000;
+            box-shadow: 0 2px 5px var(--sombra-leve);
         }
-
+        header h1 {
+            margin: 0;
+            font-size: 1.8em;
+            font-family: 'Comic Neue', cursive;
+            font-weight: 800;
+        }
         .menu-toggle {
             cursor: pointer;
             width: 30px;
@@ -29,65 +51,110 @@
             flex-direction: column;
             justify-content: space-between;
         }
-
         .menu-toggle span {
             height: 4px;
-            background: white;
+            background: var(--cor-texto-claro);
             border-radius: 2px;
+            transition: all 0.3s ease-in-out;
         }
-
         nav {
             position: absolute;
             top: 70px;
             right: 0;
-            width: 200px;
+            width: 250px;
             background-color: #2c3e50;
             border-radius: 0 0 0 10px;
             overflow: hidden;
             max-height: 0;
-            transition: max-height 0.4s ease;
+            transition: max-height 0.4s ease-out;
+            z-index: 999;
+            box-shadow: 0 4px 8px var(--sombra-media);
         }
-
         nav.show {
             max-height: 300px;
         }
-
         nav a {
             display: block;
-            padding: 15px;
+            padding: 15px 20px;
             text-decoration: none;
-            color: white;
+            color: var(--cor-texto-claro);
             border-bottom: 1px solid #34495e;
-            transition: background-color 0.3s ease;
+            transition: background-color 0.3s ease, padding-left 0.3s ease;
+            font-weight: 500;
         }
-
+        nav a:last-child {
+            border-bottom: none;
+        }
         nav a:hover {
             background-color: #34495e;
+            padding-left: 25px;
         }
-
-        i {
-            margin-right: 8px;
+        nav i {
+            margin-right: 12px;
+            font-size: 1.1em;
         }
-
-        .conteudo {
-            max-width: 800px;
-            margin: 60px auto;
-            padding: 0 20px;
+        .main-content-section {
+            width: 100%;
+            padding: 20px 40px;
+            background-color: var(--cor-texto-claro);
+            box-sizing: border-box;
+        }
+        .main-content-section h2,
+        .main-content-section h3 {
+            font-family: 'Comic Neue', cursive;
+            font-weight: 800;
+        }
+        .main-content-section h2 {
+            color: var(--cor-primaria-verde);
+            font-size: 2.6em;
+            margin-bottom: 25px;
+            text-align: center;
+            line-height: 1.2;
+        }
+        .main-content-section h3 {
+            color: var(--cor-secundaria-azul);
+            font-size: 2em;
+            margin-top: 40px;
+            margin-bottom: 20px;
             text-align: center;
         }
-
-        .conteudo h2 {
-            color: #185a9d;
+        .main-content-section p {
+            font-size: 1.2em;
+            line-height: 1.8;
+            margin-bottom: 25px;
+            color: var(--cor-texto-escuro);
+            text-align: justify;
         }
-
-        .conteudo p {
-            font-size: 18px;
-            line-height: 1.6;
-            color: #333;
+        .image-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+        }
+        .content-image {
+            width: calc(50% - 20px);
+            max-width: 500px;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px var(--sombra-leve);
+            object-fit: cover;
+            background-color: #ddd;
+        }
+        @media (max-width: 768px) {
+            .main-content-section {
+                padding: 15px;
+            }
+            .main-content-section h2 {
+                font-size: 2em;
+            }
+            .main-content-section h3 {
+                font-size: 1.5em;
+            }
+            .content-image {
+                width: 100%;
+            }
         }
     </style>
-    <!-- Ícones do site fontawesome -->
-    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 </head>
 <body>
     <header>
@@ -98,29 +165,34 @@
             <span></span>
         </div>
     </header>
-
     <nav>
-     <a href="/animais">
-    <i class="fas fa-paw"></i>
-    Animais Perdidos
-</a>
-<a href="/sobrenos">
-    <i class="fas fa-info-circle"></i>
-    Sobre Nós
-</a>
-<a href="/suaconta">
-    <i class="fas fa-user-circle"></i>
-    Sua Conta
-</a>
+       <a href="/animais"><i class="fas fa-paw"></i>Animais Perdidos</a>
+       <a href="/sobrenos"><i class="fas fa-info-circle"></i>Sobre Nós</a>
+       <a href="/suaconta"><i class="fas fa-user-circle"></i>Sua Conta</a>
     </nav>
+    <div class="main-content-section">
+        <h2>Traga Seu Pet Para Casa O Quanto Antes</h2>
+        <p>Sabemos o quão importante seu pet é para você.O projeto "Achados e Latidos" busca criar uma aplicação que facilite a busca e o registro de animais domésticos encontrados na rua. Vê-se essa necessidade uma vez que o método mais utilizado atualmente é o de divulgar folhetos com a foto do animal ou a divulgação via redes sociais, o que pode não ser muito efetivo, já que, em geral, a pessoa que encontra o animal não conhece seu dono. Para a melhor execução do projeto, foi utilizada a Programação Orientada a Objetos (POO), que permitiu uma melhor organização e coesão do código </p>
+        <div class="image-grid">
+            <img src="{{ url_for('static', filename='imagens/cachorro1.jpeg') }}" class="content-image" alt="Imagem cachorro 1">
+            <img src="{{ url_for('static', filename='imagens/cachorro2.jpeg') }}" class="content-image" alt="Imagem cachorro 2">
+        </div>
 
-    <section class="conteudo">
-        <h2>Ajude a encontrar animais perdidos</h2>
-        <p>
-            Nosso objetivo é reunir pessoas que perderam seus animais de estimação com aquelas que encontraram algum pet perdido.
-            Você pode registrar um animal perdido ou visto na rua, adicionar fotos e informações, e ajudar na busca por um lar seguro.
-            Juntos podemos fazer a diferença e trazer conforto para muitas famílias.
-        </p>
-    </section>
+        <h3>Como Funciona o Achados & Latidos?</h3>
+        <p>A crescente inserção dos animais domésticos no cotidiano humano tem gerado sentimentos profundos de felicidade e companheirismo. Contudo, a possibilidade de perdê-los é frequentemente aterradora, tornando fundamental o desenvolvimento de mecanismos e suportes para auxiliar os tutores a encontrá-los, reconhecendo a profundidade do vínculo afetivo estabelecido e a necessidade de suporte adequado nesse momento de dor.</p>
+        <div class="image-grid">
+            <img src="{{ url_for('static', filename='imagens/cachorro3.jpeg') }}" class="content-image" alt="Imagem cachorro 3">
+            <img src="{{ url_for('static', filename='imagens/cachorro4.jpeg') }}" class="content-image" alt="Imagem cachorro 4">
+        </div>
+
+        <h3>Dicas Essenciais para o Reencontro</h3>
+        <p>Uma vez registrado(a), você poderá navegar livremente por centenas de posts. E para tornar sua busca ainda mais precisa, oferecemos ferramentas de filtro avançadas. Organize por nome, cidade bairro, garantindo que você encontre rapidamente o que realmente interessa a você.
+        
+        Pronto para continuar? Navegue pelos posts e utilize os filtros para refinar sua busca e encontrar exatamente o que você precisa em nossa plataforma.</p>
+        <div class="image-grid">
+            <img src="{{ url_for('static', filename='imagens/cachorro5.jpeg') }}" class="content-image" alt="Imagem cachorro 5">
+            <img src="{{ url_for('static', filename='imagens/cachorro6.jpeg') }}" class="content-image" alt="Imagem cachorro 6">
+        </div>
+    </div>
 </body>
 </html>

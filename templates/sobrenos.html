@@ -1,78 +1,113 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="UTF-8">
     <title>Sobre o Projeto</title>
     <style>
+        /* Estilos gerais do corpo da página */
         body {
-            font-family: 'Segoe UI', sans-serif;
+            font-family: 'Inter', sans-serif; /* Usando a fonte Inter conforme a instrução */
             margin: 0;
             padding: 0;
-            background: linear-gradient(to right, #fefcea, #f1da36);
+            background: linear-gradient(to right, #fefcea, #f1da36); /* Gradiente de fundo suave */
         }
 
+        /* Estilo para o contêiner principal do conteúdo */
         .container {
             max-width: 1000px;
-            margin: 60px auto;
-            background-color: #ffffff;
+            margin: 60px auto; /* Centraliza o contêiner e adiciona margem superior/inferior */
+            background-color: #ffffff; /* Fundo branco para o conteúdo */
             padding: 40px;
-            border-radius: 25px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            border-radius: 25px; /* Bordas arredondadas para o contêiner */
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2); /* Sombra para profundidade */
         }
 
+        /* Estilo para o título principal */
         h2 {
             text-align: center;
-            color: #2c3e50;
+            color: #2c3e50; /* Cor escura para o texto */
             margin-bottom: 30px;
-            font-size: 2.8rem;
-            background: linear-gradient(to right, #3498db, #2ecc71);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            font-size: 2.8rem; /* Tamanho da fonte grande */
+            background: linear-gradient(to right, #3498db, #2ecc71); /* Gradiente de cor para o texto */
+            -webkit-background-clip: text; /* Clipa o fundo para o texto */
+            -webkit-text-fill-color: transparent; /* Torna o texto transparente para mostrar o gradiente */
         }
 
+        /* Estilo para os parágrafos de texto */
         p {
-            font-size: 1.3rem;
-            line-height: 1.9;
-            color: #34495e;
-            text-align: justify;
+            font-size: 1.3rem; /* Tamanho da fonte do parágrafo */
+            line-height: 1.9; /* Altura da linha para melhor legibilidade */
+            color: #34495e; /* Cor escura para o texto */
+            text-align: justify; /* Alinhamento justificado para o texto */
         }
 
+        /* Estilo para a citação */
         .quote {
             margin-top: 40px;
-            font-style: italic;
-            color: #6c757d;
+            font-style: italic; /* Texto em itálico */
+            color: #6c757d; /* Cor cinza para a citação */
             text-align: center;
             font-size: 1.3rem;
         }
 
+        /* Estilo para o contêiner das imagens */
         .images {
-            display: flex;
-            justify-content: space-around;
+            display: flex; /* Usa flexbox para organizar as imagens */
+            justify-content: space-around; /* Distribui o espaço entre as imagens */
             margin-top: 40px;
-            gap: 20px;
-            flex-wrap: wrap;
+            gap: 20px; /* Espaçamento entre as imagens */
+            flex-wrap: wrap; /* Permite que as imagens quebrem para a próxima linha em telas menores */
         }
 
+        /* Estilo para as imagens dentro do contêiner */
         .images img {
-            max-width: 300px;
-            border-radius: 18px;
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
-            transition: transform 0.3s ease;
+            max-width: 300px; /* Largura máxima padrão da imagem */
+            border-radius: 18px; /* Bordas arredondadas para as imagens */
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2); /* Sombra para as imagens */
+            transition: transform 0.3s ease; /* Transição suave para o efeito de hover */
             display: block; /* Garante que o placeholder funcione melhor se a imagem não carregar */
+            height: auto; /* Mantém a proporção da imagem */
         }
 
+        /* Efeito de zoom ao passar o mouse sobre as imagens */
         .images img:hover {
-            transform: scale(1.05);
+            transform: scale(1.05); /* Aumenta a imagem em 5% no hover */
         }
 
+        /* Estilo específico para a primeira imagem para torná-la mais larga */
+        .images img:first-child {
+            max-width: 450px; /* Aumenta a largura máxima da primeira imagem */
+        }
+
+
+        /* Media query para telas menores (responsividade) */
         @media (max-width: 768px) {
+            .container {
+                margin: 30px auto; /* Ajusta a margem para telas menores */
+                padding: 20px; /* Ajusta o padding para telas menores */
+            }
+
+            h2 {
+                font-size: 2.2rem; /* Ajusta o tamanho da fonte do título para telas menores */
+            }
+
+            p, .quote {
+                font-size: 1.1rem; /* Ajusta o tamanho da fonte do parágrafo e da citação */
+            }
+
             .images {
-                flex-direction: column;
-                align-items: center;
+                flex-direction: column; /* Coloca as imagens em coluna em telas menores */
+                align-items: center; /* Centraliza as imagens */
             }
 
             .images img {
-                width: 90%;
+                width: 90%; /* As imagens ocupam 90% da largura em telas menores */
+                max-width: none; /* Remove a largura máxima para que 'width: 90%' funcione */
+            }
+
+            .images img:first-child {
+                max-width: none; /* Remove a largura máxima específica para a primeira imagem em mobile */
             }
         }
     </style>
@@ -96,14 +131,14 @@
     </div>
 
     <div class="images">
-        <!-- Imagem 1: Com atributo onerror para fallback -->
-        <img src="https://images.unsplash.com/photo-1558788353-f76d92427f16?auto=format&fit=crop&w=600&q=80" 
-             alt="[Image of Cachorro olhando feliz]"
+        <!-- Imagem local: Filhotes Joana, Joaquim e José. O caminho foi corrigido para 'static/imagens/filhotes.png' com base no screenshot fornecido. -->
+        <img src="static/imagens/filhotes.png"
+             alt="Filhotes Joana, Joaquim e José"
              onerror="this.onerror=null; this.src='https://placehold.co/300x200/cccccc/ffffff?text=IMAGEM+NAO+DISPONIVEL';">
 
-        <!-- Imagem 2: Com atributo onerror para fallback -->
-        <img src="https://images.unsplash.com/photo-1592194996308-7b43878e84a6?auto=format&fit=crop&w=600&q=80" 
-             alt="[Image of Gato relaxado ao sol]"
+        <!-- Imagem de gato relaxado ao sol, com fallback -->
+        <img src="https://images.unsplash.com/photo-1592194996308-7b43878e84a6?auto=format&fit=crop&w=600&q=80"
+             alt="Gato relaxado ao sol"
              onerror="this.onerror=null; this.src='https://placehold.co/300x200/cccccc/ffffff?text=IMAGEM+NAO+DISPONIVEL';">
     </div>
 </div>

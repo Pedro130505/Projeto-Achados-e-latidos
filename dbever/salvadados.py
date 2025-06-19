@@ -43,9 +43,9 @@ class Salvamento_Dados(Ler_dados,Dados):
           #print(kwargs)
           sql = '''
             INSERT INTO animais_achados
-            (id_usuario, tipo_animal, raca, bairro, cidade, rua, horas, infos) 
+            (id_usuario, tipo_animal, raca, bairro, cidade, rua, horas, infos,imagem_url) 
             VALUES (%(id_usuario)s, %(tipo_animal)s, %(raca)s, %(bairro)s, 
-                    %(cidade)s, %(rua)s, %(horas)s, %(infos)s)
+                    %(cidade)s, %(rua)s, %(horas)s, %(infos)s,%(imagem_url)s)
         '''
           #print(kwargs)
           cursor.execute(sql, kwargs)
@@ -63,9 +63,9 @@ class Salvamento_Dados(Ler_dados,Dados):
             #print(kwargs)
             sql = '''
                 INSERT INTO animais_perdidos
-                (usuario_id, tipo_animal, raca, bairro, cidade, rua, horas, infos,nome) 
+                (usuario_id, tipo_animal, raca, bairro, cidade, rua, horas, infos,nome,imagem_url) 
                 VALUES (%(usuario_id)s,%(nome)s, %(tipo_animal)s, %(raca)s, %(bairro)s, 
-                        %(cidade)s, %(rua)s, %(horas)s, %(infos)s)
+                        %(cidade)s, %(rua)s, %(horas)s, %(infos)s,%(imagem_url)s)
             '''
             #print(kwargs)
             cursor.execute(sql, kwargs)

@@ -1,8 +1,7 @@
 from dbever.dados import Dados
 
-
-class Ver_meus_posts(Dados):                
-    def posts_usuario_achados(id_usuario):
+class Meus_Posts(Dados):                
+    def meus_posts_usuario_achados(id_usuario):
         connection = Dados.chama_arquivo()
         with connection.cursor() as cursor:
             sql = (
@@ -14,7 +13,7 @@ class Ver_meus_posts(Dados):
             return resultado
                 
 
-    def posts_usuario_perdidos(id_usuario):
+    def meus_posts_usuario_perdidos(id_usuario):
         connection = Dados.chama_arquivo()
         with connection.cursor() as cursor:
             sql = (

@@ -43,6 +43,15 @@
             line-height: 1.4;
             box-shadow: 0 1px 3px rgb(0 0 0 / 0.1);
         }
+        /* NOVO ESTILO PARA A IMAGEM */
+        li img {
+            max-width: 100%; /* Garante que a imagem não ultrapasse a largura do item da lista */
+            height: auto; /* Mantém a proporção */
+            border-radius: 4px;
+            margin-top: 10px; /* Espaço acima da imagem */
+            margin-bottom: 10px; /* Espaço abaixo da imagem */
+            border: 1px solid #ddd; /* Borda sutil */
+        }
         p.empty-message {
             color: #7f8c8d;
             font-style: italic;
@@ -60,6 +69,8 @@
             gap: 15px;
             flex-wrap: wrap;
             align-items: center;
+            margin-left: auto; /* Centraliza o formulário */
+            margin-right: auto; /* Centraliza o formulário */
         }
         form.filter-form label {
             font-weight: bold;
@@ -88,7 +99,6 @@
 </head>
 <body>
 
-<!-- Formulário de filtro -->
 <form class="filter-form" method="POST" action="{{ url_for('pesquisar_animais') }}">
     <label for="usar_filtro">Usar filtro?</label>
     <select name="usar_filtro" id="usar_filtro" required>
@@ -115,13 +125,15 @@
 </form>
 
 <div class="container">
-    <!-- Animais Achados -->
     <section>
         <h2>Animais Achados</h2>
         {% if achados %}
             <ul>
             {% for a in achados %}
                 <li>
+                    {% if a[7] %}
+                        <img src="{{ a[7] }}" alt="Foto de {{ a[0] }}"><br />
+                    {% endif %}
                     <strong>Tipo:</strong> {{ a[0] }}<br />
                     <strong>Bairro:</strong> {{ a[1] }}<br />
                     <strong>Raça:</strong> {{ a[2] }}<br />
@@ -137,13 +149,15 @@
         {% endif %}
     </section>
 
-    <!-- Animais Perdidos -->
     <section>
         <h2>Animais Perdidos</h2>
         {% if perdidos %}
             <ul>
             {% for p in perdidos %}
                 <li>
+                    {% if p[7] %}
+                        <img src="{{ p[7] }}" alt="Foto de {{ p[0] }}"><br />
+                    {% endif %}
                     <strong>Tipo:</strong> {{ p[0] }}<br />
                     <strong>Bairro:</strong> {{ p[1] }}<br />
                     <strong>Raça:</strong> {{ p[2] }}<br />

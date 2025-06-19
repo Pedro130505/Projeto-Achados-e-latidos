@@ -1,4 +1,5 @@
 from dbever.salvadados import Salvamento_Dados
+from dbever.ler_dados import Ler_dados
 # Em backend/registro.py (ou um arquivo de exceções como backend/erros.py)
 import bcrypt
 

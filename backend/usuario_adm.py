@@ -1,6 +1,6 @@
 from backend.usuario_abstrato import *
 
-class Adm(Usuario_abs):
+class Adm(Usuario):
       
     def __init__(self, email:str):
           self.email=email

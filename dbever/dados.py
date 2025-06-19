@@ -2,7 +2,7 @@
 import pymysql
 import dotenv
 import os
-import bcrypt
+
 
 
 class Dados: 

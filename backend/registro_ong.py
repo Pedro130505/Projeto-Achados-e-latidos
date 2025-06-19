@@ -1,6 +1,5 @@
 
 from .registro import *
-from dbever.ler_dados import Ler_dados
 class EmailJaCadastradoError(Exception):
     """Exceção levantada quando um e-mail tentado para registro já existe."""
     pass

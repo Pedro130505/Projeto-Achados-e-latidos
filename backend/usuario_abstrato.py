@@ -1,7 +1,7 @@
 
 from backend.imports_usuario import *
 
-class Usuario_abs(Registro_Pessoa): 
+class Usuario(Registro_Pessoa): 
     def __init__(self, email):
           self.email=email
         # Registro.__init__(email)

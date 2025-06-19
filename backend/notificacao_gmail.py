@@ -41,7 +41,7 @@ class Notificacao_Email(Notificacao):
             server.starttls()
             server.login(SENDER_EMAIL, SENDER_PASSWORD)
             server.sendmail(SENDER_EMAIL, RECEIVER_EMAIL, msg.as_string())
-            print(f"E-mail enviado com sucesso para {RECEIVER_EMAIL}!")
+            #print(f"E-mail enviado com sucesso para {RECEIVER_EMAIL}!")
 
         except Exception as e:
             print(f"Ocorreu um erro ao enviar o e-mail: {e}")

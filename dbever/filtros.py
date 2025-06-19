@@ -25,7 +25,7 @@ WHERE {coluna_escolhida} = %s
         print(resultado)
         return resultado
     
-    def filtro_perdido(coluna_escolhida,filtro_escolhido):   
+    def filtro_perdidos(coluna_escolhida,filtro_escolhido):   
                 connection = Dados.chama_arquivo()
             
 

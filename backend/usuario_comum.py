@@ -1,6 +1,6 @@
 from backend.usuario_abstrato import *
 
-class Usuario(Usuario_abs):  
+class Usuario_Comum(Usuario):  
 #deixar apenas as que exibem dados 
     def __init__(self, email):
           self.email=email
@@ -14,10 +14,10 @@ class Usuario(Usuario_abs):
       
  
     def pesquisa_meus_posts_animais_achados(self):
-            return Ver_meus_posts.posts_usuario_achados(self.get_id())
+            return Meus_Posts.meus_posts_usuario_achados(self.get_id())
             
     def pesquisa_meus_posts_animais_perdidos(self):    
-           return Ver_meus_posts.posts_usuario_perdidos(self.get_id())
+           return Meus_Posts.meus_posts_usuario_perdidos(self.get_id())
          
     
       #if =1
@@ -28,16 +28,18 @@ class Usuario(Usuario_abs):
           Salvamento_Dados.salvar_formulario_perdidos(email,**kwargs)  
       # if =3 
     def pesquisa_achados(self):
-          PostsAll.posts_usuarios_achados()
+         return Todos_Posts.posts_usuarios_achados()
           
     def pesquisa_perdidos(self):
-          PostsAll.posts_usuarios_perdidos()
+         return Todos_Posts.posts_usuarios_perdidos()
  #filtro
     def posts_achados_filtrado(self,coluna,valor):
          return Filtros.filtro_achados(coluna,valor)
 
     def posts_perdidos_filtrado(self,coluna,valor):
-          return Filtros.filtro_perdido(coluna,valor) 
+          return Filtros.filtro_perdidos(coluna,valor) 
+    
+
     #def excluir(self): 
                 #print(posts_ligados_email[self.email])
 

@@ -1,14 +1,13 @@
 from flask import Flask, render_template, request, redirect, flash, session, url_for
 from flask_session import Session
 from dbever.ler_dados import Ler_dados
-from backend.registro import Registro
 from backend.login import LogIn
-from backend.user_pesquisa_dados import Usuario_pesquisa_dados
-from backend.user_salva_dados import Usuario_salva_dados
-from backend.usuario_comum import Usuario
+from backend.usuario_comum import Usuario_Comum
 from backend.registro_ong import Registro_Ong
 from backend.notificacao_gmail import Notificacao_Email
 from backend.registro_pessoa import Registro_Pessoa
+from front_end.imagem_url import *
+
 def teste():
     app = Flask(__name__)
     app.secret_key = 'seu_valor_aqui'
@@ -73,15 +72,28 @@ def teste():
          
         # In a real application, you would typically instantiate LogIn and use its methods
         # For a basic check, assuming Ler_dados handles the actual verification
+        login = LogIn(email,senha)
+        if login.testa_email() is False:
+            return render_template('login.html', mensagem="Email não cadastrado. Tente novamente.")
+        if login.testa_senha() is False: 
+             return render_template('login.html', mensagem="Senha Incorreta.")
+        #if login.contador_erro_senha is False:
+           # return render_template('login.html', mensagem="Conta bloqueada por 5 minutos.")
+        else:
+            session['usuario_email'] = email
+            return redirect('/main')
+        '''
         if Ler_dados.ler_email(email) == False:
             return render_template('login.html', mensagem="Email não cadastrado. Tente novamente.")
         else:
             if Ler_dados.ler_senha(senha):
                 session['usuario_email'] = email
                 return redirect('/main')
+            else:
+                 return render_template('login.html', mensagem="Senha Incorreta.")
             #else:
                 #return render_template('login.html', mensagem="Senha incorreta. Tente novamente.")
-       
+       '''
 
     # ------------------------ MAIN ------------------------
     @app.route('/main', methods=['GET'])
@@ -120,6 +132,7 @@ def teste():
 
     @app.route('/registrar_animais_achados', methods=['POST'])
     def registrar_animais_achados_salva():
+        imagem_url_salva = get_uploaded_image_url()
         usuario_email = session.get('usuario_email')  
         dados = {
             'tipo_animal': request.form['tipo_animal'],
@@ -129,8 +142,9 @@ def teste():
             'rua': request.form['rua'],
             'horas': request.form['horas'],
             'infos': request.form['infos'],
+            'imagem_url':imagem_url_salva ,
         }
-        usuario = Usuario(usuario_email)
+        usuario = Usuario_Comum(usuario_email)
         usuario.salva_achados(usuario_email, **dados)
         return redirect('/animais')
 
@@ -141,6 +155,7 @@ def teste():
 
     @app.route('/registrar_animais_perdidos', methods=['POST'])
     def registrar_animais_perdidos_salva():
+        imagem_url_salva = get_uploaded_image_url()
         usuario_email = session.get('usuario_email')  
         dados = {
             'nome': request.form['nome'],
@@ -151,8 +166,9 @@ def teste():
             'rua': request.form['rua'],
             'horas': request.form['horas'],
             'infos': request.form['infos'],
+            'imagem_url':imagem_url_salva
         }
-        usuario = Usuario(usuario_email)
+        usuario = Usuario_Comum(usuario_email)
         usuario.salva_perdidos(usuario_email, **dados)
         return redirect('/animais')
 
@@ -164,7 +180,7 @@ def teste():
             usar_filtro = request.form.get('usar_filtro')
             if usar_filtro == 'sim':
                 usuario_email = session.get('usuario_email')
-                usuario = Usuario(usuario_email)
+                usuario = Usuario_Comum(usuario_email)
                 coluna = request.form.get('coluna', '')
                 valor = request.form.get('valor', '')
                 achados = usuario.posts_achados_filtrado(coluna, valor)
@@ -177,7 +193,7 @@ def teste():
                                     valor=valor)
             else:
                 usuario_email = session.get('usuario_email')
-                usuario = Usuario(usuario_email)
+                usuario = Usuario_Comum(usuario_email)
                 achados = usuario.pesquisa_achados()
                 perdidos = usuario.pesquisa_perdidos()
                 return render_template('pesquisar.html',
@@ -187,7 +203,7 @@ def teste():
         else:
             # método GET: exibir tudo por padrão
             usuario_email = session.get('usuario_email')
-            usuario = Usuario(usuario_email)
+            usuario = Usuario_Comum(usuario_email)
             achados = usuario.pesquisa_achados()
             perdidos = usuario.pesquisa_perdidos()
             return render_template('pesquisar.html',
@@ -205,7 +221,7 @@ def teste():
     @app.route('/suaconta', methods=['GET', 'POST'])
     def ver_perfil():
         email_sessao = session.get('usuario_email')
-        usuario = Usuario(email_sessao)
+        usuario = Usuario_Comum(email_sessao)
         dados_brutos = usuario.perfil()
         nome_usuario = dados_brutos[0][0]
         email_usuario = dados_brutos[0][1]

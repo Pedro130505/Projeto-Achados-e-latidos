@@ -1,6 +1,5 @@
 
 from .registro import *
-from dbever.ler_dados import Ler_dados
 # Em backend/registro.py (ou um arquivo de exceções como backend/erros.py)
 
 class EmailJaCadastradoError(Exception):
