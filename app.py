@@ -185,6 +185,7 @@ def teste():
                 valor = request.form.get('valor', '')
                 achados = usuario.posts_achados_filtrado(coluna, valor)
                 perdidos = usuario.posts_perdidos_filtrado(coluna, valor)
+                print(perdidos, achados)
                 return render_template('pesquisar.html',
                                     achados=achados,
                                     perdidos=perdidos,

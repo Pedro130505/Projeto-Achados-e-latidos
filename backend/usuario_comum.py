@@ -34,10 +34,10 @@ class Usuario_Comum(Usuario):
          return Todos_Posts.posts_usuarios_perdidos()
  #filtro
     def posts_achados_filtrado(self,coluna,valor):
-         return Filtros.filtro_achados(coluna,valor)
+         return Filtros.filtro_achados(self,coluna,valor)
 
     def posts_perdidos_filtrado(self,coluna,valor):
-          return Filtros.filtro_perdidos(coluna,valor) 
+          return Filtros.filtro_perdidos(self,coluna,valor) 
     
 
     #def excluir(self): 

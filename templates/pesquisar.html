@@ -156,15 +156,16 @@
             {% for p in perdidos %}
                 <li>
                     {% if p[7] %}
-                        <img src="{{ p[7] }}" alt="Foto de {{ p[0] }}"><br />
+                        <img src="{{ p[8] }}" alt="Foto de {{ p[0] }}"><br />
                     {% endif %}
-                    <strong>Tipo:</strong> {{ p[0] }}<br />
-                    <strong>Bairro:</strong> {{ p[1] }}<br />
-                    <strong>Raça:</strong> {{ p[2] }}<br />
-                    <strong>Rua:</strong> {{ p[3] }}<br />
-                    <strong>Informações:</strong> {{ p[4] }}<br />
-                    <strong>Horas:</strong> {{ p[5] }}<br />
-                    <strong>Cidade:</strong> {{ p[6] }}
+                     <strong>nome:</strong> {{ p[0] }}<br />
+                    <strong>Tipo:</strong> {{ p[1] }}<br />
+                    <strong>Bairro:</strong> {{ p[2] }}<br />
+                    <strong>Raça:</strong> {{ p[3] }}<br />
+                    <strong>Rua:</strong> {{ p[4] }}<br />
+                    <strong>Informações:</strong> {{ p[5] }}<br />
+                    <strong>Horas:</strong> {{ p[6] }}<br />
+                    <strong>Cidade:</strong> {{ p[7] }}
                 </li>
             {% endfor %}
             </ul>

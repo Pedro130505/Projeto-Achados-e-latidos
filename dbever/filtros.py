@@ -1,49 +1,57 @@
 from .dados import Dados
 
 
-class Filtros(Dados):  
-    def filtro_achados(coluna_escolhida,filtro_escolhido):   
-        connection = Dados.chama_arquivo()
-    
 
+
+class Filtros(Dados):  
+    def filtro_achados(self, coluna_escolhida, filtro_escolhido):
+        connection = Dados.chama_arquivo()
         colunas_validas = ['tipo_animal', 'bairro', 'raca', 'rua', 'infos', 'horas', 'cidade']
-        coluna = coluna_escolhida
+
         if coluna_escolhida not in colunas_validas:
             print("Coluna inválida. Tente novamente.")
             return []
-        
-        filtro = filtro_escolhido
-        
-        with connection.cursor() as cursor: 
-            query = f"""
-SELECT tipo_animal, bairro, raca, rua, infos, horas, cidade AS detalhe
-FROM animais_achados
-WHERE {coluna_escolhida} = %s
-"""
-            cursor.execute(query, (filtro_escolhido,))
-            resultado = cursor.fetchall()
-        print(resultado)
-        return resultado
-    
-    def filtro_perdidos(coluna_escolhida,filtro_escolhido):   
-                connection = Dados.chama_arquivo()
-            
 
-                colunas_validas = ['tipo_animal', 'bairro', 'raca', 'rua', 'infos', 'horas', 'cidade']
-                coluna = coluna_escolhida
-                if coluna_escolhida not in colunas_validas:
-                    print("Coluna inválida. Tente novamente.")
-                    return []
-                
-                filtro = filtro_escolhido
-                
-                with connection.cursor() as cursor: 
-                    query = f"""
-        SELECT nome,tipo_animal, bairro, raca, rua, infos, horas, cidade AS detalhe
-        FROM animais_perdidos
-        WHERE {coluna_escolhida} = %s
+        query = f"""
+        SELECT tipo_animal, bairro, raca, rua, infos, horas, cidade,imagem_url AS detalhe
+        FROM animais_achados
+        WHERE TRIM(LOWER({coluna_escolhida})) = TRIM(LOWER(%s))
         """
-                    cursor.execute(query, (filtro_escolhido,))
-                    resultado = cursor.fetchall()
-                print(resultado)
+
+        try:
+            with connection.cursor() as cursor:
+                cursor.execute(query, (filtro_escolhido.strip().lower(),))
+                resultado = cursor.fetchall()
+                print("Resultado (Achados):", resultado)
                 return resultado
+        except Exception as e:
+            print("Erro ao executar filtro_achados:", e)
+            return []
+
+    def filtro_perdidos(self, coluna_escolhida, filtro_escolhido):
+        connection = Dados.chama_arquivo()
+        colunas_validas = ['tipo_animal', 'bairro', 'raca', 'rua', 'infos', 'horas', 'cidade']
+
+        if coluna_escolhida not in colunas_validas:
+            print("Coluna inválida. Tente novamente.")
+            return []
+
+        query = f"""
+        SELECT nome, tipo_animal, bairro, raca, rua, infos, horas, cidade,imagem_url AS detalhe
+        FROM animais_perdidos
+        WHERE TRIM(LOWER({coluna_escolhida})) = TRIM(LOWER(%s))
+        """
+
+        try:
+            with connection.cursor() as cursor:
+                cursor.execute(query, (filtro_escolhido.strip().lower(),))
+                resultado = cursor.fetchall()
+                print("Resultado (Perdidos):", resultado)
+                return resultado
+        except Exception as e:
+            print("Erro ao executar filtro_perdidos:", e)
+            return []
+
+        
+#filtro = Filtros()
+#filtro.filtro_achados('bairro','Pinheiros')

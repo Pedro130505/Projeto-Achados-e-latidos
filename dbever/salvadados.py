@@ -33,44 +33,50 @@ class Salvamento_Dados(Ler_dados,Dados):
                    return False
     
     
-    def salvar_formulario_achados(email,**kwargs):
-        usuario_id=Ler_dados.pega_id(email)
+    @staticmethod
+    def salvar_formulario_achados(email, **kwargs):
+        usuario_id = Ler_dados.pega_id(email)
         connection = Dados.chama_arquivo()
-        #id = Ler_dados.pega_id(email) 
-        with connection.cursor() as cursor:
-    # Corrigindo a consulta SQL
-          kwargs['id_usuario'] = usuario_id
-          #print(kwargs)
-          sql = '''
-            INSERT INTO animais_achados
-            (id_usuario, tipo_animal, raca, bairro, cidade, rua, horas, infos,imagem_url) 
-            VALUES (%(id_usuario)s, %(tipo_animal)s, %(raca)s, %(bairro)s, 
-                    %(cidade)s, %(rua)s, %(horas)s, %(infos)s,%(imagem_url)s)
-        '''
-          #print(kwargs)
-          cursor.execute(sql, kwargs)
-          connection.commit()
-          # print("Linhas afetadas:", cursor.rowcount)
-          #print('comite realizado')
-        
-    def salvar_formulario_perdidos(email,**kwargs):
-        usuario_id=Ler_dados.pega_id(email)
-        connection = Dados.chama_arquivo()
-            #id = Ler_dados.pega_id(email) 
-        with connection.cursor() as cursor:
 
-            kwargs['usuario_id'] = usuario_id
-            #print(kwargs)
-            sql = '''
-                INSERT INTO animais_perdidos
-                (usuario_id, tipo_animal, raca, bairro, cidade, rua, horas, infos,nome,imagem_url) 
-                VALUES (%(usuario_id)s,%(nome)s, %(tipo_animal)s, %(raca)s, %(bairro)s, 
-                        %(cidade)s, %(rua)s, %(horas)s, %(infos)s,%(imagem_url)s)
-            '''
-            #print(kwargs)
+        # Coloca todos os valores em minúsculo (menos campos que não precisam)
+        campos_para_lower = ['tipo_animal', 'raca', 'bairro', 'cidade', 'rua', 'horas', 'infos']
+        for campo in campos_para_lower:
+            if campo in kwargs and isinstance(kwargs[campo], str):
+                kwargs[campo] = kwargs[campo].strip().lower()
+
+        kwargs['id_usuario'] = usuario_id  # adiciona o ID do usuário
+
+        sql = '''
+            INSERT INTO animais_achados
+            (id_usuario, tipo_animal, raca, bairro, cidade, rua, horas, infos, imagem_url) 
+            VALUES (%(id_usuario)s, %(tipo_animal)s, %(raca)s, %(bairro)s, 
+                    %(cidade)s, %(rua)s, %(horas)s, %(infos)s, %(imagem_url)s)
+        '''
+
+        with connection.cursor() as cursor:
             cursor.execute(sql, kwargs)
             connection.commit()
-            # print("Linhas afetadas:", cursor.rowcount)
-            #print('comite realizado')
-#Salva = Salvamento_Dados()
-#Salva.salvar_dados('pedro','teste@testetesteadsada','123456')
+
+    @staticmethod
+    def salvar_formulario_perdidos(email, **kwargs):
+        usuario_id = Ler_dados.pega_id(email)
+        connection = Dados.chama_arquivo()
+
+        # Coloca todos os valores em minúsculo (menos imagem_url e nome, se quiser manter o nome com maiúscula)
+        campos_para_lower = ['tipo_animal', 'raca', 'bairro', 'cidade', 'rua', 'horas', 'infos']
+        for campo in campos_para_lower:
+            if campo in kwargs and isinstance(kwargs[campo], str):
+                kwargs[campo] = kwargs[campo].strip().lower()
+
+        kwargs['usuario_id'] = usuario_id  # adiciona o ID do usuário
+
+        sql = '''
+            INSERT INTO animais_perdidos
+            (nome, bairro, rua, cidade, horas, tipo_animal, infos, raca, usuario_id, imagem_url) 
+            VALUES (%(nome)s, %(bairro)s, %(rua)s, %(cidade)s, %(horas)s, 
+                    %(tipo_animal)s, %(infos)s, %(raca)s, %(usuario_id)s, %(imagem_url)s)
+        '''
+
+        with connection.cursor() as cursor:
+            cursor.execute(sql, kwargs)
+            connection.commit()
