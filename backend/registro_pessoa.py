@@ -1,9 +1,9 @@
 
 from .registro import *
-# Em backend/registro.py (ou um arquivo de exceções como backend/erros.py)
+
 
 class EmailJaCadastradoError(Exception):
-    """Exceção levantada quando um e-mail tentado para registro já existe."""
+    
     pass
 
 class Registro_Pessoa(Registro):

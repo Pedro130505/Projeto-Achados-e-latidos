@@ -2,7 +2,6 @@ from .dados import Dados
 
 
 
-
 class Filtros(Dados):  
     def filtro_achados(self, coluna_escolhida, filtro_escolhido):
         connection = Dados.chama_arquivo()
@@ -53,5 +52,3 @@ class Filtros(Dados):
             return []
 
         
-#filtro = Filtros()
-#filtro.filtro_achados('bairro','Pinheiros')

@@ -1,4 +1,4 @@
-from dbever.dados import Dados
+from data_bank.dados import Dados
 
 class Todos_Posts(Dados):
 
@@ -9,8 +9,8 @@ class Todos_Posts(Dados):
             sql = "SELECT tipo_animal, bairro, raca, rua, infos, horas, cidade,imagem_url AS detalhe FROM animais_achados"
             cursor.execute(sql)
             resultado = cursor.fetchall()
-             # só para debug, pode remover depois
-            return resultado  # retorna a lista completa
+            
+            return resultado  
 
     @staticmethod
     def posts_usuarios_perdidos():
@@ -19,5 +19,5 @@ class Todos_Posts(Dados):
             sql = "SELECT nome, tipo_animal, bairro, raca, rua, infos, horas, cidade,imagem_url AS detalhe FROM animais_perdidos"
             cursor.execute(sql)
             resultado = cursor.fetchall()
-            # só para debug, pode remover depois
-            return resultado  # retorna a lista completa
+        
+            return resultado  

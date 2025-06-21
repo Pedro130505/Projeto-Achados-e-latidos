@@ -4,6 +4,6 @@ from backend.login import LogIn
 from backend.registro_pessoa import Registro_Pessoa
 from backend.usuario_comum import Usuario_Comum 
 from flask_session import Session
-from dbever.posts_all import Todos_Posts
-from dbever.ler_dados import Ler_dados
+from data_bank.posts_all import Todos_Posts
+from data_bank.ler_dados import Ler_dados
 

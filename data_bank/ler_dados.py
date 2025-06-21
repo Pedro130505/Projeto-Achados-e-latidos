@@ -23,13 +23,13 @@ class Ler_dados(Dados):
         connection = Dados.chama_arquivo()
         with connection.cursor() as cursor:
                     dados = ''
-                    sql = 'SELECT email FROM REGISTRO '   # o sql guarda quais colunas eu quero adicionar  #%s funciona como em c
-                    cursor.execute(sql)# executa o processo nas colunas que o sql guardou 
+                    sql = 'SELECT email FROM REGISTRO '   
+                    cursor.execute(sql)
                     dados = cursor.fetchall()
                     for emails in dados:
                         for email_fora_tupla in emails: 
                             if email == email_fora_tupla:
-                                #print('ta na base')
+            
                                 return True
                                 break
                     else:
@@ -40,16 +40,16 @@ class Ler_dados(Dados):
         connection = Dados.chama_arquivo()
         with connection.cursor() as cursor:
                     dados = ''
-                    sql = 'SELECT pass_hash FROM REGISTRO '   # o sql guarda quais colunas eu quero adicionar  #%s funciona como em c
-                    cursor.execute(sql)# executa o processo nas colunas que o sql guardou 
+                    sql = 'SELECT pass_hash FROM REGISTRO '  
+                    cursor.execute(sql) 
                     dados = cursor.fetchall()
                     for senhas in dados:
                         print(senhas)
                         for senha_fora_tupla in senhas: 
-                            senha_fora_tupla = senha_fora_tupla.encode('utf-8') # fazendo o dado do banco virar bits
+                            senha_fora_tupla = senha_fora_tupla.encode('utf-8') 
                             if bcrypt.checkpw(senha_hash, senha_fora_tupla):
-                                #print('ta na base')
+                                
                                 return True            
                     else:
-                        #print('n ta na base')
+            
                         return False

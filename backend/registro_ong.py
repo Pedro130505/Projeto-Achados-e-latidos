@@ -1,7 +1,7 @@
 
 from .registro import *
 class EmailJaCadastradoError(Exception):
-    """Exceção levantada quando um e-mail tentado para registro já existe."""
+
     pass
 
 class Registro_Ong(Registro):

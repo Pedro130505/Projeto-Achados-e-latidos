@@ -6,46 +6,22 @@
     <title>Sua Conta</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        /* Importing Merriweather for a professional serif look */
         @import url('https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700&family=Inter:wght@300;400;600;700&display=swap');
 
         body {
-            font-family: 'Merriweather', serif; /* Changed to Merriweather for body text */
+            font-family: 'Merriweather', serif;
             background-color: #e0eaff;
-            margin: 0;
             padding: 20px;
             color: #333;
         }
 
-        /* Keep Inter for certain elements if desired, e.g., buttons, info items for contrast */
-        .return-button {
-            font-family: 'Inter', sans-serif;
-        }
-
-        .main-wrapper {
-            width: 100%;
-            max-width: none;
-            box-sizing: border-box;
-        }
-
-        .profile-header {
-            padding-bottom: 1rem;
-            border-bottom: 1px solid #f0f0f0;
-            margin-bottom: 2rem;
-            display: flex; /* Use flexbox for alignment */
-            align-items: center; /* Vertically center items */
-            gap: 20px; /* Space between image and info */
-        }
-
         .profile-image-wrapper {
-            position: relative; /* Needed for positioning the upload button/label */
+            position: relative;
             width: 96px;
             height: 96px;
             border-radius: 50%;
             overflow: hidden;
-            display: inline-block;
-            vertical-align: middle;
-            flex-shrink: 0; /* Prevent shrinking on small screens */
+            flex-shrink: 0;
         }
 
         .profile-image {
@@ -59,304 +35,140 @@
 
         .upload-photo-btn {
             position: absolute;
-            top: 0; /* Cover the entire image */
-            left: 0; /* Cover the entire image */
-            width: 100%; /* Cover the entire image */
-            height: 100%; /* Cover the entire image */
-            background-color: rgba(0, 0, 0, 0.3); /* Slightly transparent overlay */
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.3);
             color: white;
-            border-radius: 50%;
-            display: flex; /* To center text or icon if desired */
+            display: flex;
             justify-content: center;
             align-items: center;
             cursor: pointer;
-            opacity: 0; /* Hidden by default */
-            transition: opacity 0.2s ease; /* Smooth transition */
-            border: none; /* No border for the label */
+            opacity: 0;
+            transition: opacity 0.2s ease;
         }
 
         .profile-image-wrapper:hover .upload-photo-btn {
-            opacity: 1; /* Show on hover */
-        }
-
-        .upload-photo-btn span {
-            font-size: 0.8rem; /* Smaller text for "Alterar" */
-            font-weight: 600;
-            text-transform: uppercase;
+            opacity: 1;
         }
 
         .upload-photo-btn input[type="file"] {
-            display: none; /* Hide the default file input */
+            display: none;
         }
 
-        .profile-info {
-            display: inline-block;
-            vertical-align: middle;
-            /* margin-left: 20px; No longer needed due to gap on profile-header */
-        }
-
-        /* ESTILIZAÇÃO DO NOME E EMAIL */
-        .info-item {
-            font-family: 'Inter', sans-serif; /* Usar Inter para consistência e leitura */
-            font-size: 1.1rem; /* Um pouco maior */
-            color: #1a202c; /* Cor original do texto */
-            margin-bottom: 0.5rem; /* Espaçamento entre os itens */
-            display: flex; /* Usar flexbox para alinhar rótulo e valor */
-            align-items: baseline; /* Alinhar texto na base da linha */
-        }
-
-        .info-item strong {
-            font-weight: 700; /* Mais negrito para o rótulo */
-            color: #4a5568; /* Uma cor mais escura para o rótulo */
-            margin-right: 0.5rem; /* Espaçamento entre o rótulo e o valor */
-            white-space: nowrap; /* Evitar que o rótulo quebre a linha */
-        }
-        /* FIM DA ESTILIZAÇÃO DO NOME E EMAIL */
-
-        .posts-section {
-            margin-top: 2rem;
-        }
-
-        .posts-section h2 {
-            font-size: 1.5rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
-            color: #1a202c;
-            border-bottom: 3px solid #6a00ff;
-            padding-bottom: 0.25rem;
-            font-family: 'Inter', sans-serif; /* Keep headings as sans-serif for readability if desired */
-        }
-
-        .posts-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-            gap: 1.5rem;
+        img.animal-img {
+            width: 100%;
+            max-width: 200px;
+            max-height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
         }
 
         .post-card {
-            background-color: #fff;
+            background: #fff;
             border: 1px solid #ddd;
-            border-radius: 0.5rem;
-            padding: 1rem 1rem 1.5rem 0.5rem;
-            position: relative;
-            box-shadow: 0 1px 4px rgba(0,0,0,0.1);
-            transition: box-shadow 0.3s ease;
-        }
-        .post-card:hover {
-            box-shadow: 0 6px 15px rgba(0,0,0,0.15);
+            border-radius: 8px;
+            padding: 1rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            gap: 1rem;
+            box-shadow: 0 1px 6px rgba(0, 0, 0, 0.1);
         }
 
-        .post-title {
-            font-weight: 700;
-            color: #4a5568;
-            margin-bottom: 0.5rem;
-            font-size: 1.15rem;
-            text-align: left;
-            padding-left: 0;
-            margin-left: 0;
-        }
-
-        .post-description {
-            color: #6b7280;
-            font-size: 0.95rem;
-            padding: 0;
-            margin: 0;
-            text-align: left;
-        }
-
-        .post-description > div {
+        .info-item {
             margin-bottom: 0.25rem;
-            text-align: left;
-        }
-        .post-description > div:last-child {
-            margin-bottom: 0;
         }
 
-        /* Botão lixeira */
-        .btn-excluir {
-            position: absolute;
-            top: 12px;
-            right: 12px;
-            background: transparent;
-            border: none;
-            cursor: pointer;
-            color: #e53e3e; /* vermelho */
-            font-size: 1.3rem;
-            transition: color 0.2s ease;
-            padding: 0;
-        }
-        .btn-excluir:hover {
-            color: #9b2c2c;
-        }
-
-        /* Ícone SVG estilo */
-        .btn-excluir svg {
-            width: 22px;
-            height: 22px;
-            pointer-events: none;
-            vertical-align: middle;
-        }
-
-        .no-posts-message {
-            font-style: italic;
-            color: #9ca3af;
-        }
-
-        /* Style for the return button */
-        .return-button {
+        strong {
             display: inline-block;
-            margin-top: 2rem;
-            background: #6a00ff;
-            color: #fff;
-            padding: 0.6rem 1.5rem;
-            border-radius: 0.5rem;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 0.9rem;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-            letter-spacing: 0.02em;
-            text-transform: uppercase;
-            border: none;
-            cursor: pointer;
-            font-family: 'Inter', sans-serif; /* Keep button as sans-serif for readability/contrast */
-        }
-
-        @media (max-width: 480px) {
-            .profile-image-wrapper {
-                width: 72px;
-                height: 72px;
-            }
-            .posts-grid {
-                grid-template-columns: 1fr;
-                gap: 1rem;
-            }
+            width: 100px;
         }
     </style>
 </head>
 <body>
     <div class="main-wrapper">
-        <div class="profile-header">
+        <!-- Cabeçalho de perfil -->
+        <div class="flex items-center gap-6 mb-6 border-b pb-4">
             <div class="profile-image-wrapper">
-                <img src="{{ foto_perfil_url if foto_perfil_url else 'https://images.unsplash.com/photo-1535713875002-d1d0cfce7bd4?auto=format&fit=crop&q=80&w=1780' }}" alt="Foto de Perfil" class="profile-image" onerror="this.onerror=null; this.src='https://placehold.co/96x96/cccccc/ffffff?text=ERRO'">
-                <label for="profile-upload" class="upload-photo-btn" title="Alterar foto de perfil">
+                <img src="{{ foto_perfil_url if foto_perfil_url else 'https://placehold.co/96x96/cccccc/ffffff?text=Foto' }}"
+                     alt="Foto de Perfil" class="profile-image" 
+                     onerror="this.onerror=null; this.src='https://placehold.co/96x96/cccccc/ffffff?text=Erro';">
+                <label for="profile-upload" class="upload-photo-btn">
                     <span>Alterar</span>
                     <input type="file" id="profile-upload" accept="image/*" onchange="handleProfilePhotoUpload(event)">
                 </label>
             </div>
-            <div class="profile-info">
-                <div class="info-item"><strong>Nome Completo:</strong> {{ nome }}</div>
+            <div>
+                <div class="info-item"><strong>Nome:</strong> {{ nome }}</div>
                 <div class="info-item"><strong>Email:</strong> {{ email }}</div>
             </div>
         </div>
 
-        <div class="posts-section">
-            <h2>Meus Animais Achados</h2>
+        <!-- Seção de animais achados -->
+        <section>
+            <h2 class="text-xl font-bold mb-2">Meus Animais Achados</h2>
             {% if achados %}
-            <div class="posts-grid">
                 {% for a in achados %}
-                <div class="post-card">
-                    <button class="btn-excluir" onclick="excluirAnimal('animal achado')"
-                            title="Excluir animal achado" type="button">
-                        <svg fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                            <path fill-rule="evenodd" clip-rule="evenodd" d="M9 3a1 1 0 00-.993.883L8 4v1H5a1 1 0 100 2h14a1 1 0 100-2h-3V4a1 1 0 00-1-1H9zm-4 6a1 1 0 011-1h10a1 1 0 011 1v9a3 3 0 01-3 3H8a3 3 0 01-3-3v-9zM9 8a1 1 0 012 0v7a1 1 0 11-2 0V8zm4 0a1 1 0 10-2 0v7a1 1 0 102 0V8z"/>
-                        </svg>
-                    </button>
-                    <div class="post-title"><strong>Tipo:</strong> {{ a[0] }}</div>
-                    <div class="post-description">
-                        <div><strong>Bairro:</strong> {{ a[1] }}</div>
-                        <div><strong>Raça:</strong> {{ a[2] }}</div>
-                        <div><strong>Rua:</strong> {{ a[3] }}</div>
-                        <div><strong>Informações:</strong> {{ a[4] }}</div>
-                        <div><strong>Horas:</strong> {{ a[5] }}</div>
-                        <div><strong>Cidade:</strong> {{ a[6] }}</div>
+                    <div class="post-card">
+                        <img class="animal-img" src="{{ a[7] if a[7] else 'https://placehold.co/200x200?text=Sem+Foto' }}" alt="Animal achado">
+                        <div>
+                            <div class="info-item"><strong>Tipo:</strong> {{ a[0] }}</div>
+                            <div class="info-item"><strong>Raça:</strong> {{ a[1] }}</div>
+                            <div class="info-item"><strong>Bairro:</strong> {{ a[2] }}</div>
+                            <div class="info-item"><strong>Cidade:</strong> {{ a[3] }}</div>
+                            <div class="info-item"><strong>Rua:</strong> {{ a[4] }}</div>
+                            <div class="info-item"><strong>Horas:</strong> {{ a[5] }}</div>
+                            <div class="info-item"><strong>Infos:</strong> {{ a[6] }}</div>
+                        </div>
                     </div>
-                </div>
                 {% endfor %}
-            </div>
             {% else %}
-            <p class="no-posts-message">Você ainda não cadastrou nenhum animal achado.</p>
+                <p class="italic text-gray-500">Você ainda não cadastrou nenhum animal achado.</p>
             {% endif %}
-        </div>
+        </section>
 
-        <div class="posts-section">
-            <h2>Meus Animais Perdidos</h2>
+        <!-- Seção de animais perdidos -->
+        <section class="mt-10">
+            <h2 class="text-xl font-bold mb-2">Meus Animais Perdidos</h2>
             {% if perdidos %}
-            <div class="posts-grid">
                 {% for p in perdidos %}
-                <div class="post-card">
-                    <button class="btn-excluir" onclick="excluirAnimal('animal perdido')"
-                            title="Excluir animal perdido" type="button">
-                        <svg fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                            <path fill-rule="evenodd" clip-rule="evenodd" d="M9 3a1 1 0 00-.993.883L8 4v1H5a1 1 0 100 2h14a1 1 0 100-2h-3V4a1 1 0 00-1-1H9zm-4 6a1 1 0 011-1h10a1 1 0 011 1v9a3 3 0 01-3 3H8a3 3 0 01-3-3v-9zM9 8a1 1 0 012 0v7a1 1 0 11-2 0V8zm4 0a1 1 0 10-2 0v7a1 1 0 102 0V8z"/>
-                        </svg>
-                    </button>
-                    <div class="post-title"><strong>Tipo:</strong> {{ p[0] }}</div>
-                    <div class="post-description">
-                        <div><strong>Nome:</strong> {{ p[7] if p|length > 7 else 'N/A' }}</div>
-                        <div><strong>Bairro:</strong> {{ p[1] }}</div>
-                        <div><strong>Raça:</strong> {{ p[2] }}</div>
-                        <div><strong>Rua:</strong> {{ p[3] }}</div>
-                        <div><strong>Informações:</strong> {{ p[4] }}</div>
-                        <div><strong>Horas:</strong> {{ p[5] }}</div>
-                        <div><strong>Cidade:</strong> {{ p[6] }}</div>
+                    <div class="post-card">
+                        <img class="animal-img" src="{{ p[8] if p[8] else 'https://placehold.co/200x200?text=Sem+Foto' }}" alt="Animal perdido">
+                        <div>
+                            <div class="info-item"><strong>Nome:</strong> {{ p[0] }}</div>
+                            <div class="info-item"><strong>Tipo:</strong> {{ p[1] }}</div>
+                            <div class="info-item"><strong>Bairro:</strong> {{ p[2] }}</div>
+                            <div class="info-item"><strong>Raça:</strong> {{ p[3] }}</div>
+                            <div class="info-item"><strong>Rua:</strong> {{ p[4] }}</div>
+                            <div class="info-item"><strong>Infos:</strong> {{ p[5] }}</div>
+                            <div class="info-item"><strong>Horas:</strong> {{ p[6] }}</div>
+                            <div class="info-item"><strong>Cidade:</strong> {{ p[7] }}</div>
+                        </div>
                     </div>
-                </div>
                 {% endfor %}
-            </div>
             {% else %}
-            <p class="no-posts-message">Você ainda não cadastrou nenhum animal perdido.</p>
+                <p class="italic text-gray-500">Você ainda não cadastrou nenhum animal perdido.</p>
             {% endif %}
-        </div>
+        </section>
 
-        <a href="{{ url_for('main_chama') }}" class="return-button">
-            Retornar à Página Principal
-        </a>
+        <a href="{{ url_for('main_chama') }}" class="return-button mt-8 inline-block bg-purple-700 text-white px-5 py-2 rounded font-bold">Voltar à página principal</a>
     </div>
 
     <script>
-        function excluirAnimal(tipo) {
-            // Directly show the confirmation alert without the initial prompt
-            alert(`Exclusão confirmada para o ${tipo}.`);
-            // Here you would add the actual backend logic to delete the item
-        }
-
-        // Função para lidar com o upload da foto de perfil
         function handleProfilePhotoUpload(event) {
             const file = event.target.files[0];
             if (file) {
                 const reader = new FileReader();
-                reader.onload = function(e) {
-                    const profileImage = document.querySelector('.profile-image');
-                    profileImage.src = e.target.result; // Update the image source
-                    // --- BACKEND INTEGRATION STARTS HERE ---
-                    // You would typically send this file to your backend server
-                    // using fetch() or XMLHttpRequest.
-                    // Example (simplified):
-                    /*
-                    const formData = new FormData();
-                    formData.append('profile_photo', file);
-
-                    fetch('/upload-profile-photo', { // Replace with your backend endpoint
-                        method: 'POST',
-                        body: formData
-                    })
-                    .then(response => response.json())
-                    .then(data => {
-                        if (data.success) {
-                            alert('Foto de perfil atualizada com sucesso!');
-                            // Optionally, update foto_perfil_url variable if it's dynamic
-                        } else {
-                            alert('Erro ao atualizar foto de perfil: ' + data.message);
-                        }
-                    })
-                    .catch(error => {
-                        console.error('Erro no upload:', error);
-                        alert('Erro de conexão ao enviar a foto.');
-                    });
-                    */
-                    // --- BACKEND INTEGRATION ENDS HERE ---
+                reader.onload = function (e) {
+                    document.querySelector('.profile-image').src = e.target.result;
+                    // Aqui você enviaria o arquivo para o servidor com fetch()
+                    // Exemplo:
+                    // const formData = new FormData();
+                    // formData.append('foto_perfil', file);
+                    // fetch('/upload-perfil', { method: 'POST', body: formData });
                 };
-                reader.readAsDataURL(file); // Read the file as a data URL
+                reader.readAsDataURL(file);
             }
         }
     </script>

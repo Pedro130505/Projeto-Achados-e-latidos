@@ -1,5 +1,5 @@
 from backend.registro_pessoa import Registro_Pessoa
-from dbever.ler_dados import Ler_dados 
+from data_bank.ler_dados import Ler_dados 
 
 
 class LogIn:

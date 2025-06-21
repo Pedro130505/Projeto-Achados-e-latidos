@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request, redirect, flash, session, url_for
 from flask_session import Session
-from dbever.ler_dados import Ler_dados
+from data_bank.ler_dados import Ler_dados
 from backend.login import LogIn
 from backend.usuario_comum import Usuario_Comum
 from backend.registro_ong import Registro_Ong
@@ -231,8 +231,18 @@ def teste():
 
         return render_template('suaconta.html', nome=nome_usuario, email=email_usuario,achados=achados,
                                     perdidos=perdidos,)
-
+    @app.route('/logout', methods=['GET', 'POST'])
+    def logout():
+        if request.method == 'POST':
+            # Só faz logout se o botão for clicado
+            session.pop('usuario', None)
+            return redirect(url_for('index'))
+        return render_template('logout.html') 
     return app # <--- ADD THIS LINE HERE!
+
+    
+
+
 
 if __name__ == '__main__':
     app = teste()

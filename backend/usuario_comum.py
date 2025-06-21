@@ -32,7 +32,7 @@ class Usuario_Comum(Usuario):
           
     def pesquisa_perdidos(self):
          return Todos_Posts.posts_usuarios_perdidos()
- #filtro
+      #filtro
     def posts_achados_filtrado(self,coluna,valor):
          return Filtros.filtro_achados(self,coluna,valor)
 
@@ -40,15 +40,8 @@ class Usuario_Comum(Usuario):
           return Filtros.filtro_perdidos(self,coluna,valor) 
     
 
-    #def excluir(self): 
-                #print(posts_ligados_email[self.email])
-
 
 #a =Usuario('teste4@')
 #a.perfil()
 
-
-
-    #FILTROS, RECEBER NOMES DAS COISAS SEMPRE SEM LETRA MAIUSCU
-    # FAZER ÁGINA RECEBNDO SUA CONTA EMAIL E USARIO JUNTO COM SEUS POSTS'''
 

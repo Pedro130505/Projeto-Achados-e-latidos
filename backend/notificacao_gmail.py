@@ -49,6 +49,3 @@ class Notificacao_Email(Notificacao):
             if 'server' in locals() and server:
                 server.quit()
 
-
-#teste =Notificacao_Email('brandao.pedro13@gmail.com')
-#este.manda_notificacao()

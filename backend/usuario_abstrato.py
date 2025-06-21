@@ -4,7 +4,7 @@ from backend.imports_usuario import *
 class Usuario(Registro_Pessoa): 
     def __init__(self, email):
           self.email=email
-        # Registro.__init__(email)
+      
 
 
     @abstractmethod

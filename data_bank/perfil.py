@@ -1,4 +1,4 @@
-from dbever.dados import Dados
+from data_bank.dados import Dados
 
 class Perfil(Dados):                
     def dados_perfil(self,id_usuario):
@@ -9,7 +9,7 @@ class Perfil(Dados):
 
 )
             cursor.execute(sql, (id_usuario,))
-            resultado = cursor.fetchall()  # fetchall para pegar todos os registros
+            resultado = cursor.fetchall()  
             print(resultado)
             return resultado 
                

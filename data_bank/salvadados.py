@@ -11,8 +11,8 @@ class Salvamento_Dados(Ler_dados,Dados):
             connection = Dados.chama_arquivo()
             with connection.cursor() as cursor:
                   try:
-                        sql = 'INSERT INTO REGISTRO (nome, email, pass_hash) VALUES (%s, %s, %s)' # o sql guarda quais colunas eu quero adicionar  #%s funciona como em c
-                        cursor.execute(sql, (nome,email,hash))# executa o processo nas colunas que o sql guardou 
+                        sql = 'INSERT INTO REGISTRO (nome, email, pass_hash) VALUES (%s, %s, %s)'
+                        cursor.execute(sql, (nome,email,hash))
                         connection.commit()
                         return True
                   except:
@@ -24,8 +24,8 @@ class Salvamento_Dados(Ler_dados,Dados):
             connection = Dados.chama_arquivo()
             with connection.cursor() as cursor:
               try:
-                sql = 'INSERT INTO REGISTRO (cnpj, email, pass_hash) VALUES (%s, %s, %s)' # o sql guarda quais colunas eu quero adicionar  #%s funciona como em c
-                cursor.execute(sql, (cnpj,email,hash))# executa o processo nas colunas que o sql guardou 
+                sql = 'INSERT INTO REGISTRO (cnpj, email, pass_hash) VALUES (%s, %s, %s)' 
+                cursor.execute(sql, (cnpj,email,hash))
                 connection.commit()
                 return True
               except: 
@@ -38,13 +38,12 @@ class Salvamento_Dados(Ler_dados,Dados):
         usuario_id = Ler_dados.pega_id(email)
         connection = Dados.chama_arquivo()
 
-        # Coloca todos os valores em minúsculo (menos campos que não precisam)
         campos_para_lower = ['tipo_animal', 'raca', 'bairro', 'cidade', 'rua', 'horas', 'infos']
         for campo in campos_para_lower:
             if campo in kwargs and isinstance(kwargs[campo], str):
                 kwargs[campo] = kwargs[campo].strip().lower()
 
-        kwargs['id_usuario'] = usuario_id  # adiciona o ID do usuário
+        kwargs['id_usuario'] = usuario_id  
 
         sql = '''
             INSERT INTO animais_achados
@@ -62,14 +61,13 @@ class Salvamento_Dados(Ler_dados,Dados):
         usuario_id = Ler_dados.pega_id(email)
         connection = Dados.chama_arquivo()
 
-        # Coloca todos os valores em minúsculo (menos imagem_url e nome, se quiser manter o nome com maiúscula)
+   
         campos_para_lower = ['tipo_animal', 'raca', 'bairro', 'cidade', 'rua', 'horas', 'infos']
         for campo in campos_para_lower:
             if campo in kwargs and isinstance(kwargs[campo], str):
                 kwargs[campo] = kwargs[campo].strip().lower()
 
-        kwargs['usuario_id'] = usuario_id  # adiciona o ID do usuário
-
+        kwargs['usuario_id'] = usuario_id  
         sql = '''
             INSERT INTO animais_perdidos
             (nome, bairro, rua, cidade, horas, tipo_animal, infos, raca, usuario_id, imagem_url) 

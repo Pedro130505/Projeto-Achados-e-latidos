@@ -1,10 +1,10 @@
-from dbever.salvadados import Salvamento_Dados
-from dbever.ler_dados import Ler_dados
-# Em backend/registro.py (ou um arquivo de exceções como backend/erros.py)
+from data_bank.salvadados import Salvamento_Dados
+from data_bank.ler_dados import Ler_dados
+
 import bcrypt
 
 class EmailJaCadastradoError(Exception):
-    """Exceção levantada quando um e-mail tentado para registro já existe."""
+  
     pass
 
 class Registro:
